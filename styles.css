@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Roboto:wght@300;400&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Abril Fatface", cursive;
+  color: aliceblue;
+}
+
+html{
+    background-color: #0a0908;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #0a0908;
+}
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 1rem 2rem;
+  gap: 2rem;
+  border-bottom: 10px solid #0a0908;
+}
+
+.header {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 1rem 2rem;
+  color: #0a0908;
+  background-color: orangered;
+  gap: 2rem;
+  border-bottom: 10px solid #0a0908;
+}
+.header .logo-SANDWICHS {
+  width: 200px;
+  height: 200px;
+}
+.header .panel-inferior .horario {
+  display: flex;
+  flex-direction: column;
+}
+.header .panel-inferior .horario .horario-descripcion {
+  font-family: "Abril Fatface", cursive;
+}
+.titulo-cabecera{
+    color: #0a0908;
+}
+
+.main .logo-carrito {
+    width: 200px;
+    height: 200px;
+  }
