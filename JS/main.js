@@ -6,6 +6,27 @@ const acompañamientos = [];
 let costoTotal = 0;
 let numeroPedido;
 
+// almacenar los costos de los elementos
+const costos = {
+    pan: {
+        blanco: 500,
+        integral: 600,
+        arabe: 800
+    },
+    carne: {
+        pollo: 5000,
+        ternera: 7000,
+        pescado: 6000
+    },
+    acompañamientos: {
+        queso: 800,
+        lechuga: 400,
+        tomate: 500,
+        bacon: 800,
+        cebolla: 400
+    }
+};
+
 // Función para obtener la opción del usuario
 function obtenerOpcion(mensaje, opciones) {
     let opcionSeleccionada;
@@ -19,57 +40,15 @@ function obtenerOpcion(mensaje, opciones) {
 function calcularCostoTotal() {
     costoTotal = 0;
     // Calcular costo del pan
-    switch (tipoPan) {
-        case 'blanco':
-            costoTotal += 500;
-            break;
-        case 'integral':
-            costoTotal += 600;
-            break;
-        case 'arabe':
-            costoTotal += 800;
-            break;
-        default:
-            break;
-    }
+    costoTotal += costos.pan[tipoPan];
 
     // Calcular costo de la carne
-    switch (tipoCarne) {
-        case 'pollo':
-            costoTotal += 5000;
-            break;
-        case 'ternera':
-            costoTotal += 7000;
-            break;
-        case 'pescado':
-            costoTotal += 6000;
-            break;
-        default:
-            break;
-    }
+    costoTotal += costos.carne[tipoCarne];
 
-    // Calcular costo de los acompañamientos
-    for (let i = 0; i < acompañamientos.length; i++) {
-        switch (acompañamientos[i]) {
-            case 'queso':
-                costoTotal += 800;
-                break;
-            case 'lechuga':
-                costoTotal += 400;
-                break;
-            case 'tomate':
-                costoTotal += 500;
-                break;
-            case 'bacon':
-                costoTotal += 800;
-                break;
-            case 'cebolla':
-                costoTotal += 400;
-                break;
-            default:
-                break;
-        }
-    }
+    // Calcular costo de los acompañamientos usando forEach
+    acompañamientos.forEach(acompañamiento => {
+        costoTotal += costos.acompañamientos[acompañamiento];
+    });
 
     // Aplicar descuento si el costo total supera cierto monto
     if (costoTotal > 10000) {
@@ -77,6 +56,11 @@ function calcularCostoTotal() {
     } else {
         alert('No se aplicó descuento. El costo total no supera el monto necesario.');
     }
+}
+
+// Función para filtrar acompañamientos
+function filtrarAcompañamientos(criterio) {
+    return acompañamientos.filter(acompañamiento => acompañamiento.includes(criterio));
 }
 
 // Función principal
@@ -93,6 +77,12 @@ function armarSandwich() {
         deseaAcompañamiento = confirm('¿Desea agregar otro acompañamiento?');
     }
 
+    // Usar length para obtener la cantidad de acompañamientos
+    const cantidadAcompañamientos = acompañamientos.length;
+
+    // Usar find para encontrar un acompañamiento específico
+    const acompañamientoTomate = acompañamientos.find(acompañamiento => acompañamiento === 'bacon');
+
     // Calcular el costo total
     calcularCostoTotal();
 
@@ -105,6 +95,8 @@ function armarSandwich() {
         'Tipo de pan: ' + tipoPan + '\n' +
         'Tipo de carne: ' + tipoCarne + '\n' +
         'Acompañamientos: ' + acompañamientos.join(', ') + '\n' +
+        'Cantidad de acompañamientos: ' + cantidadAcompañamientos + '\n' +
+        'Acompañamiento tomate presente: ' + (acompañamientoTomate ? 'Sí' : 'No') + '\n' +
         'Costo total: $' + costoTotal.toFixed(2) + '\n' +
         'Número de pedido: #' + numeroPedido);
 }
