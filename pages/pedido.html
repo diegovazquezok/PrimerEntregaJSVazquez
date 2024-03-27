@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,14 +16,49 @@
         </div>
     </header>
 
-<main>
-    <h1>Sanwich's te da la bienvenida</h1>
+    <main>
+        <h1>Sanwich's te da la bienvenida</h1>
 
-    <h2>Tu pedido ha sido realizado con éxito</h2>
+        <div id="formulario">
+            <h2>Armar Sandwich</h2>
+            <form id="formularioPedido">
+                <label for="nombreCliente">Nombre:</label>
+                <input type="text" id="nombreCliente" name="nombreCliente" required><br>
+        
+                <label for="tipoPan">Tipo de Pan:</label>
+                <select id="tipoPan" name="tipoPan" required>
+                    <option value="blanco">Blanco</option>
+                    <option value="integral">Integral</option>
+                    <option value="arabe">Árabe</option>
+                </select><br>
+        
+                <label for="tipoCarne">Tipo de Carne:</label>
+                <select id="tipoCarne" name="tipoCarne" required>
+                    <option value="pollo">Pollo</option>
+                    <option value="ternera">Ternera</option>
+                    <option value="pescado">Pescado</option>
+                </select><br>
+        
+                <p>Acompañamientos:</p>
+                <input type="checkbox" id="queso" name="acompañamiento" value="queso">
+                <label for="queso"> Queso</label><br>
+                <input type="checkbox" id="lechuga" name="acompañamiento" value="lechuga">
+                <label for="lechuga"> Lechuga</label><br>
+                <input type="checkbox" id="tomate" name="acompañamiento" value="tomate">
+                <label for="tomate"> Tomate</label><br>
+                <input type="checkbox" id="bacon" name="acompañamiento" value="bacon">
+                <label for="bacon"> Bacon</label><br>
+                <input type="checkbox" id="cebolla" name="acompañamiento" value="cebolla">
+                <label for="cebolla"> Cebolla</label><br>
+        
+                <input type="submit" value="Hacer Pedido">
+            </form>
+        </div>
 
+        <div id="resumenPedido"></div>
 
-</main>
+    </main>
 
-<script src="../JS/main.js"></script>
+    <script src="../JS/main.js"></script>
 </body>
 </html>
