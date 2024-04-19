@@ -1,104 +1,51 @@
-//DOM
-const formulario = document.getElementById('formularioPedido');
-const resumenPedidoDiv = document.getElementById('resumenPedido');
+// Función para cargar el resumen del pedido en el index.html
+function cargarResumenPedido() {
+    const resumenPedido = JSON.parse(localStorage.getItem('resumenPedido'));
+    if (resumenPedido) {
+        // Calcular costo total sumando lo de página 1 y página 2
+        const costoTotal = resumenPedido.costoTotal;
+        const resumenPedidoHTML = `
+            <h2>Resumen del Pedido</h2>
+            <p>Cliente: ${resumenPedido.nombreCliente}</p>
+            <p>Tipo de Pan: ${resumenPedido.tipoPan}</p>
+            <p>Tipo de Carne: ${resumenPedido.tipoCarne}</p>
+            <p>Acompañamientos: ${resumenPedido.acompañamientos.join(', ')}</p>
+            ${resumenPedido.gaseosa ? `<p>Gaseosa: ${resumenPedido.gaseosa}</p>` : ''}
+            <p>Costo Total: $${costoTotal.toFixed(2)}</p>
+            <p>Número de Pedido: #${resumenPedido.numeroPedido}</p>
+        `;
+        const resumenPedidoDiv = document.getElementById('resumenPedido');
+        resumenPedidoDiv.innerHTML = resumenPedidoHTML;
 
-formulario.addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    // DOM en el formulario
-    const nombreCliente = document.getElementById('nombreCliente').value;
-    const tipoPan = document.getElementById('tipoPan').value;
-    const tipoCarne = document.getElementById('tipoCarne').value;
-    const checkboxes = document.querySelectorAll('input[name="acompañamiento"]:checked');
-    const acompañamientos = [];
-    checkboxes.forEach(function(checkbox) {
-        acompañamientos.push(checkbox.value);
-    });
-
-    let costoTotal = 0;
-    let numeroPedido;
-    let contadorPedidos = 1;
-
-    // Precios de alimentos
-    const costos = {
-        pan: {
-            blanco: 500,
-            integral: 600,
-            arabe: 800
-        },
-        carne: {
-            pollo: 5000,
-            ternera: 7000,
-            pescado: 6000
-        },
-        acompañamientos: {
-            queso: 800,
-            lechuga: 400,
-            tomate: 500,
-            bacon: 800,
-            cebolla: 400
-        }
-    };
-
-    // Numero de pedido (comienzan en el 1001)
-    function obtenerNumeroPedidoReal() {
-        const numeroPedidoReal = 1000 + contadorPedidos; 
-        contadorPedidos++; 
-        return numeroPedidoReal;
+        // Actualizar el costo total
+        const calculadora = document.getElementById('totalPrecio');
+        calculadora.innerText = `$${costoTotal.toFixed(2)}`;
     }
+}
 
-    // Precio Total
-    function calcularCostoTotal() {
-        costoTotal = 0;
+// Trae el resumen del pedido
+cargarResumenPedido();
 
-        costoTotal += costos.pan[tipoPan];
-        costoTotal += costos.carne[tipoCarne];
-        acompañamientos.forEach(acompañamiento => {
-            costoTotal += costos.acompañamientos[acompañamiento];
-        });
+// Botón para agregar papas
+const agregarPapasButton = document.getElementById('agregarPapas');
+agregarPapasButton.addEventListener('click', function() {
+    // Sumar $1500 al total del pedido
+    const calculadora = document.getElementById('totalPrecio');
+    const costoActual = parseFloat(calculadora.innerText.substring(1)); 
+    const nuevoCosto = costoActual + 1500;
+    calculadora.innerText = `$${nuevoCosto.toFixed(2)}`;
 
-        // Aplicar descuento si el precio total supera cierto monto
-        if (costoTotal > 10000) {
-            costoTotal -= 1000; // Descuento de $1000
-        }
-    }
-
-    calcularCostoTotal();
-
-    // Generar número de pedido
-    numeroPedido = obtenerNumeroPedidoReal();
-
-    // resumen del pedido
-    const resumenPedidoHTML = `
-        <h2>Resumen del Pedido</h2>
-        <p>Cliente: ${nombreCliente}</p>
-        <p>Tipo de Pan: ${tipoPan}</p>
-        <p>Tipo de Carne: ${tipoCarne}</p>
-        <p>Acompañamientos: ${acompañamientos.join(', ')}</p>
-        <p>Costo Total: $${costoTotal.toFixed(2)}</p>
-        <p>Número de Pedido: #${numeroPedido}</p>
-    `;
-
-    // Insertar el resumen del pedido en el div resumenPedidoDiv
-    resumenPedidoDiv.innerHTML = resumenPedidoHTML;
-
-    // Guardar el resumen del pedido en localStorage
-    localStorage.setItem('resumenPedido', JSON.stringify({
-        nombreCliente: nombreCliente,
-        tipoPan: tipoPan,
-        tipoCarne: tipoCarne,
-        acompañamientos: acompañamientos,
-        costoTotal: costoTotal,
-        numeroPedido: numeroPedido
-    }));
-
-    // Guardar el resumen del pedido en sessionStorage
-    sessionStorage.setItem('resumenPedido', JSON.stringify({
-        nombreCliente: nombreCliente,
-        tipoPan: tipoPan,
-        tipoCarne: tipoCarne,
-        acompañamientos: acompañamientos,
-        costoTotal: costoTotal,
-        numeroPedido: numeroPedido
-    }));
+    // Agregar papas al resumen
+    const resumenPedidoDiv = document.getElementById('resumenPedido');
+    const resumenPedidoHTML = resumenPedidoDiv.innerHTML;
+    const nuevoResumenPedidoHTML = resumenPedidoHTML + '<p>Papas agregadas</p>';
+    resumenPedidoDiv.innerHTML = nuevoResumenPedidoHTML;
 });
+
+// Botón para confirmar el pedido
+const confirmarPedidoButton = document.getElementById('confirmarPedido');
+confirmarPedidoButton.addEventListener('click', function() {
+    // Redirigir al index.html
+    window.location.href = "../index.html";
+});
+

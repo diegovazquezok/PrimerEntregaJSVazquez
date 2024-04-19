@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Sandwich's</title>
 </head>
 <body>
@@ -17,7 +18,7 @@
     </header>
 
     <main>
-        <h1>Sanwich's te da la bienvenida</h1>
+        <h1 class="bienvenida">Sanwich's te da la bienvenida</h1>
 
         <div id="formulario">
             <h2>Armar Sandwich</h2>
@@ -51,14 +52,23 @@
                 <input type="checkbox" id="cebolla" name="acompañamiento" value="cebolla">
                 <label for="cebolla"> Cebolla</label><br>
         
-                <input type="submit" value="Hacer Pedido">
+                <button type="button" id="hacerPedidoButton">Hacer Pedido</button>
+
             </form>
         </div>
 
         <div id="resumenPedido"></div>
+        <button type="button" id="confirmarPedidoButton">Confirmar Pedido</button>
 
     </main>
 
-    <script src="../JS/main.js"></script>
+    <script src="../JS/pedido_1.js"></script>
+    <script>
+        const confirmarPedidoButton = document.getElementById('confirmarPedidoButton');
+        confirmarPedidoButton.addEventListener('click', function() {
+            //  al index.html
+            window.location.href = "../index.html";
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,42 @@
+<!-- pedido_2.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <title>Sandwich's</title>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo-SANDWICHS"><img src="../IMG/LOGO.jpg" alt="logo empresa"></div>
+        <div class="horario">
+            <h1 class="titulo-cabecera">SANDWICH'S</h1>
+            <h2 class="titulo-cabecera">Martes a domingos 13:00 a 23:00 hs </h2>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="bienvenida">Sanwich's te da la bienvenida</h1>
+
+        <div id="formulario">
+            <h2>Elegir gaseosa</h2>
+            <form id="formularioPedido">
+                <label for="gaseosa">Gaseosa:</label>
+                <select id="gaseosa" name="gaseosa" required>
+                    <option value="coca">Coca-Cola</option>
+                    <option value="pepsi">Pepsi</option>
+                    <option value="sprite">Sprite</option>
+                </select><br>
+
+                <button type="button" id="hacerPedidoButton">Hacer Pedido</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="../JS/pedido_2.js"></script>
+</body>
+</html>
